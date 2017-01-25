@@ -9,7 +9,15 @@ var bodyParser = require('body-parser');
 var planning = require('./routes/jf-planning');
 
 var app = express();
+var helmet = require('helmet')
+app.use(helmet());
 
+var basicAuth = require('express-basic-auth');
+
+app.use(basicAuth({
+    users: { 'community': 'sfi3fh64soggaz5au!dz' }
+}));
+//app.disable('x-powered-by');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');

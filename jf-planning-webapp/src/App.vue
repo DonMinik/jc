@@ -113,7 +113,12 @@
 
 export default {
   name: 'app',
+
   http: {
+    root: '/root',
+    headers: {
+      Authorization: 'Basic sfi3fh64soggaz5au!dz'
+    },
       emulateJSON: true,
       emulateHTTP: true
     },
@@ -159,15 +164,25 @@ export default {
   },
   methods: {
     submit : function () {
-      this.$http.post('http://'+this.$url.parse().hostname+':3000/jc/jf/entry',this.selection).then((response) => {
-      }, (response) => {
+    //  this.$http.headers.common['Access-Control-Allow-Origin'] = '*';
+    //  this.$http.headers['Authorization'] = 'Basic Y29tbXVuaXR5OnNmaTNmaDY0c29nZ2F6NWF1IWR6';
+      console.log(  this.$http.headers);
+    //  this.$http.headers.common['Origin'] = this.$url;
+    //172.17.0.2
+    //  this.$http.post('http://'+this.$url.parse().hostname+':3000/jc/jf/entry',this.selection).then((response) => {
+
+    this.$http.post('http://172.17.0.2:3000/jc/jf/entry',this.selection /*,{'headers':{'Authorization':'Basic sfi3fh64soggaz5au!dz'}} */).then((response) => {
+    }, (response) => {
         //error callback
         console.log(response);
       });
     },
     loadData : function() {
       //load savedData
-      this.$http.get('http://'+this.$url.parse().hostname+':3000/jc/jf/entry').then((response) => {
+    //  this.$http.headers.common['Access-Control-Allow-Origin'] = '*';
+      //this.$http.headers.common['Authorization'] = 'Basic Y29tbXVuaXR5OnNmaTNmaDY0c29nZ2F6NWF1IWR6';
+      //this.$http.headers.common['Origin'] = this.$url;
+      this.$http.get('http://172.17.0.2:3000/jc/jf/entry'/*,{'headers':{'Authorization':'Basic sfi3fh64soggaz5au!dz'}}*/).then((response) => {
         //success callback
         this.savedData = response.body.data;
       }, (response) => {
